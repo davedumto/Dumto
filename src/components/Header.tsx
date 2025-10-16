@@ -11,7 +11,7 @@ export function Header() {
   const title = 'Public Speaker & Leadership Expert';
 
   return (
-    <header className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-blue-100 dark:from-slate-900 dark:via-blue-900 dark:to-blue-800 transition-all duration-500">
+    <header className="relative h-screen flex flex-col justify-between overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-blue-100 dark:from-slate-900 dark:via-blue-900 dark:to-blue-800 transition-all duration-500">
       {/* Theme Toggle Button */}
       <motion.button
         onClick={toggleTheme}
@@ -35,7 +35,7 @@ export function Header() {
       </div>
 
       {/* Hero Content */}
-      <div className="relative z-10 text-center max-w-5xl mx-auto px-6">
+      <div className="relative z-10 text-center max-w-5xl mx-auto px-6 flex-1 flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -57,7 +57,7 @@ export function Header() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tight"
+            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight"
           >
             <span className="bg-gradient-to-r from-slate-900 via-blue-800 to-blue-900 dark:from-white dark:via-blue-200 dark:to-blue-100 bg-clip-text text-transparent">
               {name.split(' ')[0]}
@@ -72,7 +72,7 @@ export function Header() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-6 text-xl sm:text-2xl text-slate-600 dark:text-slate-300 font-light max-w-3xl mx-auto leading-relaxed"
+            className="mt-4 sm:mt-6 text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-300 font-light max-w-3xl mx-auto leading-relaxed"
           >
             {title}
           </motion.p>
@@ -82,7 +82,7 @@ export function Header() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center"
+            className="mt-8 sm:mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <motion.a 
               href="#newsletter"

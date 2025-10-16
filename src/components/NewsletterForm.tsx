@@ -192,7 +192,7 @@ export function NewsletterForm() {
                       </>
                     ) : (
                       <>
-                        <span>Get Instant Access</span>
+                        <span>Subscribe to newsletter</span>
                         <motion.span
                           animate={{ x: [0, 4, 0] }}
                           transition={{ repeat: Infinity, duration: 1.5 }}

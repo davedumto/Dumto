@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 export function About() {
   // Replace with your actual bio
   const bio = 'With 4+ years of building software solutions and a deep passion for human potential, I transitioned into teaching leadership and personal development. I help professionals unlock their full potential by combining technical problem-solving mindsets with actionable leadership strategies that drive real transformation.';
@@ -36,10 +37,11 @@ export function About() {
               {/* Modern card with glassmorphism */}
               <div className="backdrop-blur-xl bg-white/10 dark:bg-black/10 border border-white/20 dark:border-white/10 rounded-3xl p-8 shadow-2xl">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden relative">
-                  <img 
+                  <Image 
                     src="/david.jpg" 
                     alt="David Ejere - Public Speaker & Leadership Expert" 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105" 
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                 </div>

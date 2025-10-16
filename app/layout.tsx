@@ -7,7 +7,6 @@ export const metadata = {
   description: 'Software developer turned leadership expert helping professionals unlock their potential. Get proven strategies for career transformation and leadership development through speaking events and workshops.',
   keywords: 'David Ejere, leadership expert, public speaker, career transformation, professional development, software developer, leadership training, speaking events',
   author: 'David Ejere',
-  viewport: 'width=device-width, initial-scale=1',
   openGraph: {
     title: 'David Ejere - Leadership Expert & Public Speaker',
     description: 'Transform your career with proven leadership strategies from a software developer turned expert speaker.',
@@ -19,6 +18,11 @@ export const metadata = {
     title: 'David Ejere - Leadership Expert & Public Speaker',
     description: 'Transform your career with proven leadership strategies from a software developer turned expert speaker.',
   },
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({

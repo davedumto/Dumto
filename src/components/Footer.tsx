@@ -8,6 +8,38 @@ export function Footer() {
   const email = 'davidejerespeaks@gmail.com';
   const instagramUrl = 'https://www.instagram.com/dumtochukwu_/';
   const linkedinUrl = 'https://www.linkedin.com/in/david-ejere-5056161a1';
+
+  const handleInstagramClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const username = 'dumtochukwu_'; // Extract username from URL
+    
+    // Try to open Instagram app first
+    const appUrl = `instagram://user?username=${username}`;
+    const webUrl = instagramUrl;
+    
+    // Create a temporary link to test if the app opens
+    const tempLink = document.createElement('a');
+    tempLink.href = appUrl;
+    
+    // For mobile devices, try app URL first
+    if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      // Set a timeout to fallback to web if app doesn't open
+      const timeout = setTimeout(() => {
+        window.open(webUrl, '_blank', 'noopener,noreferrer');
+      }, 500);
+      
+      // Try to open the app
+      window.location.href = appUrl;
+      
+      // If we're still here after attempting to open the app, clear the timeout
+      window.addEventListener('blur', () => {
+        clearTimeout(timeout);
+      }, { once: true });
+    } else {
+      // For desktop, just open web version
+      window.open(webUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
   return <footer id="contact" className="relative py-24 overflow-hidden bg-slate-900 dark:bg-black">
       {/* Modern mesh gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-blue-800 dark:from-black dark:via-blue-900 dark:to-slate-900"></div>
@@ -54,8 +86,7 @@ export function Footer() {
               <div className="flex gap-3">
                 <motion.a 
                   href={instagramUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
+                  onClick={handleInstagramClick}
                   whileHover={{ scale: 1.1, rotate: 5 }}
                   whileTap={{ scale: 0.9 }}
                   className="p-3 backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl hover:bg-white/20 transition-all duration-300"

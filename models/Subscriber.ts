@@ -26,7 +26,4 @@ const SubscriberSchema: Schema = new Schema({
   },
 });
 
-// Create index for email for faster lookups
-SubscriberSchema.index({ email: 1 });
-
 export default mongoose.models.Subscriber || mongoose.model<ISubscriber>('Subscriber', SubscriberSchema);

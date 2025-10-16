@@ -118,7 +118,7 @@ export function Header() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+        className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}

@@ -112,7 +112,8 @@ export async function POST(request: NextRequest) {
             margin: 20px 0;
           }
           .social-links a {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             margin: 0 15px;
             color: #3b82f6;
             text-decoration: none;

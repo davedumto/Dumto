@@ -162,11 +162,11 @@ export async function POST(request: NextRequest) {
           <div class="footer">
             <div class="social-links">
               <a href="https://www.linkedin.com/in/david-ejere-5056161a1/">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn" class="social-icon" style="filter: invert(39%) sepia(57%) saturate(1390%) hue-rotate(204deg) brightness(97%) contrast(97%);">
+                <img src="https://res.cloudinary.com/dwjnkuvqv/image/upload/v1727180738/Uptions_Vector_mr3yf7.png" alt="LinkedIn" class="social-icon">
                 LinkedIn
               </a>
               <a href="https://www.instagram.com/dumtochukwu_/">
-                <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/instagram.svg" alt="Instagram" class="social-icon" style="filter: invert(39%) sepia(57%) saturate(1390%) hue-rotate(204deg) brightness(97%) contrast(97%);">
+                <img src="https://res.cloudinary.com/dwjnkuvqv/image/upload/v1727180738/Uptions_Vector_1_faowco.png" alt="Instagram" class="social-icon">
                 Instagram
               </a>
             </div>

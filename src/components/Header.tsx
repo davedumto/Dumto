@@ -91,7 +91,7 @@ export function Header() {
               className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 text-white font-semibold rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
             >
               <span className="flex items-center gap-2">
-                Sign Up For Newsletter
+                Subscribe to Newsletter
                 <motion.span
                   animate={{ x: [0, 4, 0] }}
                   transition={{ repeat: Infinity, duration: 1.5 }}

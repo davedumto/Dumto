@@ -127,7 +127,6 @@ export async function POST(request: NextRequest) {
           .social-icon {
             width: 24px;
             height: 24px;
-            vertical-align: middle;
             margin-right: 8px;
             display: inline-block;
           }

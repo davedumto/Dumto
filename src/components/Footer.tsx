@@ -1,13 +1,15 @@
 'use client';
 
 import React from 'react';
-import { InstagramIcon, SendIcon, Linkedin } from 'lucide-react';
+import { Instagram, Linkedin, Github, Facebook } from 'lucide-react';
 import { motion } from 'framer-motion';
 export function Footer() {
   // Replace with your actual email and social media URLs
   const email = 'davidejerespeaks@gmail.com';
   const instagramUrl = 'https://www.instagram.com/dumtochukwu_/';
   const linkedinUrl = 'https://www.linkedin.com/in/david-ejere-5056161a1';
+  const githubUrl = 'https://github.com/davedumto';
+  const facebookUrl = 'https://www.facebook.com/profile.php?id=61550060649755';
 
   const handleInstagramClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -69,20 +71,20 @@ export function Footer() {
               whileTap={{ scale: 0.95 }}
               className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
             >
-              <span>Book Speaking Event</span>
-              <motion.span
+              <span>Book me for your events</span>
+              {/* <motion.span
                 animate={{ x: [0, 4, 0] }}
                 transition={{ repeat: Infinity, duration: 1.5 }}
               >
                 →
-              </motion.span>
+              </motion.span> */}
             </motion.a>
             
             <motion.div 
               whileHover={{ scale: 1.05 }}
               className="flex items-center gap-4"
             >
-              <span className="text-slate-400 font-medium">Follow me:</span>
+              <span className="text-slate-400 font-medium">and Follow me:</span>
               <div className="flex gap-3">
                 <motion.a 
                   href={instagramUrl} 
@@ -92,7 +94,7 @@ export function Footer() {
                   className="p-3 backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl hover:bg-white/20 transition-all duration-300"
                   aria-label="Instagram"
                 >
-                  <InstagramIcon className="h-6 w-6 text-white" />
+                  <Instagram className="h-6 w-6 text-white" />
                 </motion.a>
                 <motion.a 
                   href={linkedinUrl} 
@@ -104,6 +106,28 @@ export function Footer() {
                   aria-label="LinkedIn"
                 >
                   <Linkedin className="h-6 w-6 text-white" />
+                </motion.a>
+                <motion.a 
+                  href={githubUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-3 backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl hover:bg-white/20 transition-all duration-300"
+                  aria-label="GitHub"
+                >
+                  <Github className="h-6 w-6 text-white" />
+                </motion.a>
+                <motion.a 
+                  href={facebookUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1, rotate: -5 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="p-3 backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl hover:bg-white/20 transition-all duration-300"
+                  aria-label="Facebook"
+                >
+                  <Facebook className="h-6 w-6 text-white" />
                 </motion.a>
               </div>
             </motion.div>

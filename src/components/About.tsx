@@ -3,9 +3,38 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { Instagram, Linkedin, Github, Facebook } from 'lucide-react';
 export function About() {
   // Replace with your actual bio
   const bio = 'With 4+ years of building software solutions and a deep passion for human potential, I transitioned into teaching leadership and personal development. I help professionals unlock their full potential by combining technical problem-solving mindsets with actionable leadership strategies that drive real transformation.';
+  
+  // Social media URLs
+  const instagramUrl = 'https://www.instagram.com/dumtochukwu_/';
+  const linkedinUrl = 'https://www.linkedin.com/in/david-ejere-5056161a1';
+  const githubUrl = 'https://github.com/davedumto';
+  const facebookUrl = 'https://www.facebook.com/profile.php?id=61550060649755';
+  
+  const handleInstagramClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const username = 'dumtochukwu_';
+    
+    const appUrl = `instagram://user?username=${username}`;
+    const webUrl = instagramUrl;
+    
+    if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+      const timeout = setTimeout(() => {
+        window.open(webUrl, '_blank', 'noopener,noreferrer');
+      }, 500);
+      
+      window.location.href = appUrl;
+      
+      window.addEventListener('blur', () => {
+        clearTimeout(timeout);
+      }, { once: true });
+    } else {
+      window.open(webUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
   return <section id="about" className="py-24 relative bg-white dark:bg-slate-900 transition-all duration-500 overflow-hidden">
       {/* Modern grid background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20"></div>
@@ -127,6 +156,66 @@ export function About() {
                 </motion.div>
               ))}
             </div>
+
+            {/* Social Media Links */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="pt-8 border-t border-slate-200 dark:border-slate-700"
+            >
+              <div className="flex flex-col sm:flex-row items-center gap-6">
+                <span className="text-slate-600 dark:text-slate-400 font-medium text-sm">
+                  Connect with me:
+                </span>
+                <div className="flex gap-4">
+                  <motion.a 
+                    href={instagramUrl} 
+                    onClick={handleInstagramClick}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-3 bg-gradient-to-r from-pink-500/10 to-purple-500/10 border border-pink-500/20 rounded-xl hover:from-pink-500/20 hover:to-purple-500/20 transition-all duration-300 group"
+                    aria-label="Instagram"
+                  >
+                    <Instagram className="h-5 w-5 text-pink-600 dark:text-pink-400 group-hover:text-pink-500" />
+                  </motion.a>
+                  <motion.a 
+                    href={linkedinUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-3 bg-gradient-to-r from-blue-500/10 to-blue-600/10 border border-blue-500/20 rounded-xl hover:from-blue-500/20 hover:to-blue-600/20 transition-all duration-300 group"
+                    aria-label="LinkedIn"
+                  >
+                    <Linkedin className="h-5 w-5 text-blue-600 dark:text-blue-400 group-hover:text-blue-500" />
+                  </motion.a>
+                  <motion.a 
+                    href={githubUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-3 bg-gradient-to-r from-slate-500/10 to-slate-600/10 border border-slate-500/20 rounded-xl hover:from-slate-500/20 hover:to-slate-600/20 transition-all duration-300 group"
+                    aria-label="GitHub"
+                  >
+                    <Github className="h-5 w-5 text-slate-600 dark:text-slate-400 group-hover:text-slate-500" />
+                  </motion.a>
+                  <motion.a 
+                    href={facebookUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="p-3 bg-gradient-to-r from-blue-600/10 to-blue-700/10 border border-blue-600/20 rounded-xl hover:from-blue-600/20 hover:to-blue-700/20 transition-all duration-300 group"
+                    aria-label="Facebook"
+                  >
+                    <Facebook className="h-5 w-5 text-blue-700 dark:text-blue-500 group-hover:text-blue-600" />
+                  </motion.a>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

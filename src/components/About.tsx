@@ -38,7 +38,7 @@ export function About() {
               <div className="backdrop-blur-xl bg-white/10 dark:bg-black/10 border border-white/20 dark:border-white/10 rounded-3xl p-8 shadow-2xl">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden relative">
                   <Image 
-                    src="/david.jpg" 
+                    src="/dumto.jpg" 
                     alt="David Ejere - Public Speaker & Leadership Expert" 
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-105" 

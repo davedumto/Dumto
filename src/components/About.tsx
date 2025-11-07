@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { Instagram, Linkedin, Github, Facebook } from 'lucide-react';
+import { ImageCarousel } from './ImageCarousel';
 export function About() {
   // Replace with your actual bio
   const bio = 'With 4+ years of building software solutions and a deep passion for human potential, I transitioned into teaching leadership and personal development. I help professionals unlock their full potential by combining technical problem-solving mindsets with actionable leadership strategies that drive real transformation.';
@@ -13,6 +13,26 @@ export function About() {
   const linkedinUrl = 'https://www.linkedin.com/in/david-ejere-5056161a1';
   const githubUrl = 'https://github.com/davedumto';
   const facebookUrl = 'https://www.facebook.com/profile.php?id=61550060649755';
+
+  // Speaking engagement images for carousel
+  const speakingImages = [
+    {
+      src: '/dumto.jpg',
+      alt: 'David Ejere - Professional headshot'
+    },
+    {
+      src: '/DSC_0947.jpg',
+      alt: 'David Ejere speaking at leadership event'
+    },
+    {
+      src: '/IMG_0960.jpg',
+      alt: 'David Ejere presenting at workshop'
+    },
+    {
+      src: '/IMG_8463.jpg',
+      alt: 'David Ejere engaging with audience'
+    }
+  ];
   
   const handleInstagramClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -35,7 +55,7 @@ export function About() {
       window.open(webUrl, '_blank', 'noopener,noreferrer');
     }
   };
-  return <section id="about" className="py-24 relative bg-white dark:bg-slate-900 transition-all duration-500 overflow-hidden">
+  return <section id="about" className="py-24 relative bg-white dark:bg-slate-900 transition-all duration-500 overflow-x-hidden">
       {/* Modern grid background */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20"></div>
       
@@ -54,26 +74,22 @@ export function About() {
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Modern image section */}
+          {/* Speaking engagement carousel */}
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative"
+            className="relative pb-16 pr-16"
           >
             <div className="relative group">
               {/* Modern card with glassmorphism */}
               <div className="backdrop-blur-xl bg-white/10 dark:bg-black/10 border border-white/20 dark:border-white/10 rounded-3xl p-8 shadow-2xl">
-                <div className="aspect-[4/5] rounded-2xl overflow-hidden relative">
-                  <Image 
-                    src="/dumto.jpg" 
-                    alt="David Ejere - Public Speaker & Leadership Expert" 
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-                </div>
+                <ImageCarousel 
+                  images={speakingImages}
+                  autoSlideInterval={3000}
+                  className=""
+                />
               </div>
               
               {/* Floating stats cards */}

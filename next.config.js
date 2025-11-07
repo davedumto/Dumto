@@ -1,6 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // appDir is now stable and enabled by default in Next.js 14+
+  images: {
+    // Allow optimization of large images
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+  },
 }
 
 module.exports = nextConfig

@@ -2,7 +2,10 @@ import '../src/index.css'
 import { MotionProvider } from '../src/components/MotionProvider'
 import { Toaster } from 'sonner'
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.ejere.site'
+
 export const metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'David Ejere, Leadership Expert & Public Speaker',
   description: 'Software developer turned leadership expert helping professionals unlock their potential. Get proven strategies for career transformation and leadership development through speaking events and workshops.',
   keywords: 'David Ejere, leadership expert, public speaker, career transformation, professional development, software developer, leadership training, speaking events',
@@ -12,11 +15,20 @@ export const metadata = {
     description: 'Transform your career with proven leadership strategies from a software developer turned expert speaker.',
     type: 'website',
     locale: 'en_US',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'David Ejere, public speaker and leadership expert',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'David Ejere, Leadership Expert & Public Speaker',
     description: 'Transform your career with proven leadership strategies from a software developer turned expert speaker.',
+    images: ['/og-image.png'],
   },
 }
 

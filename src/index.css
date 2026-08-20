@@ -1,5 +1,491 @@
 /* PLEASE NOTE: THESE TAILWIND IMPORTS SHOULD NEVER BE DELETED */
+@import url('https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&display=swap');
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 /* DO NOT DELETE THESE TAILWIND IMPORTS, OTHERWISE THE STYLING WILL NOT RENDER AT ALL */
+
+/* ============================================================
+   01 · TOKENS — warm paper, hard ink, no blur
+   ============================================================ */
+:root {
+  /* ground */
+  --paper: #F2F1E8;
+  --surface: #F6F5EE;
+  --ink: #0D0D0F;
+  --ink-inv: #F4F3EF;
+
+  /* accents — blue is primary and carries the brand */
+  --blue: #2563EB;
+  --blue-lt: #60A5FA;  /* bright variant — dark panels only */
+  --violet: #6B5BFF;
+  --sky: #00A8E8;
+  --amber: #FFB020;
+  --coral: #FF5C38;
+  --whatsapp: #25D366; /* WhatsApp community section only */
+
+  /* derived text — opacity on ink, never separate greys.
+     Kept high enough to read comfortably on the paper ground. */
+  --muted: rgba(13, 13, 15, 0.8);
+  --label: rgba(13, 13, 15, 0.66);
+  --muted-inv: rgba(244, 243, 239, 0.78);
+
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+  --ease-snap: cubic-bezier(0.22, 0.9, 0.24, 1);
+}
+
+/* ============================================================
+   02 · BASE
+   ============================================================ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+/* paper grain — must stay barely perceptible */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--blue);
+  color: var(--paper);
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   03 · LAYOUT PRIMITIVES
+   ============================================================ */
+.container-page {
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: 28px;
+}
+
+.section {
+  padding-block: clamp(72px, 9vw, 104px);
+}
+
+/* ============================================================
+   04 · TYPE PRIMITIVES
+   ============================================================ */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--label);
+}
+
+.eyebrow--dark {
+  color: var(--muted-inv);
+}
+
+/* ============================================================
+   05 · SURFACES — every shadow is hard: Npx Npx 0 0
+   ============================================================ */
+.card {
+  --card-accent: var(--ink);
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: 22px;
+  box-shadow: 8px 8px 0 0 var(--card-accent);
+}
+
+.card-hover {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card-hover:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 10px 10px 0 0 var(--card-accent);
+}
+
+.dark-card {
+  background: #17171C;
+  border: 2px solid rgba(244, 243, 239, 0.16);
+  border-radius: 28px;
+  box-shadow: 10px 10px 0 0 var(--blue-lt);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2px solid var(--ink);
+  border-radius: 9999px;
+  padding: 0.45rem 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.chip--bright {
+  background: var(--blue-lt);
+  color: var(--ink);
+}
+
+/* ============================================================
+   06 · BUTTONS — hover presses INTO the page
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  padding: 15px 26px;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+.btn-primary {
+  --btn-accent: var(--blue);
+  background: var(--ink);
+  color: var(--ink-inv);
+}
+
+.btn-inverse {
+  --btn-accent: var(--blue-lt);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.btn-primary,
+.btn-inverse {
+  box-shadow: 6px 6px 0 0 var(--btn-accent);
+}
+
+.btn-primary:hover,
+.btn-inverse:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 0 var(--btn-accent);
+}
+
+.btn-primary:active,
+.btn-inverse:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn-secondary:hover {
+  background: rgba(13, 13, 15, 0.06);
+}
+
+.btn-secondary:active {
+  transform: translate(2px, 2px);
+}
+
+.icon-btn {
+  --icon-accent: var(--blue);
+  display: inline-flex;
+  padding: 0.75rem;
+  border: 2px solid var(--ink);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 4px 4px 0 0 var(--icon-accent);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.icon-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 0 var(--icon-accent);
+}
+
+.icon-btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+.icon-btn--dark {
+  background: transparent;
+  border-color: rgba(244, 243, 239, 0.35);
+  color: var(--ink-inv);
+}
+
+/* ============================================================
+   07 · NAV
+   ============================================================ */
+.nav-link {
+  position: relative;
+  color: var(--ink);
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s var(--ease-snap), background-color 0.2s ease;
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* scrollspy: the section currently in view keeps a blue underline */
+.nav-link--active {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.nav-link--active::after {
+  background: var(--blue);
+  transform: scaleX(1);
+}
+
+/* ============================================================
+   07b · HERO PORTRAIT — a print laid on the paper: slight
+   rotation, ink frame, hard shadow
+   ============================================================ */
+.hero-portrait {
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: 28px;
+  background: var(--surface);
+  box-shadow: 12px 12px 0 0 var(--blue);
+  transform: rotate(1deg);
+}
+
+/* ============================================================
+   08 · MARQUEE
+   ============================================================ */
+.marquee {
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 42s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.marquee-item > span {
+  margin-inline: 1.25rem;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ============================================================
+   09 · PULSE DOT — opacity only, nothing travels
+   ============================================================ */
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 9999px;
+  background: var(--blue);
+  animation: pulse-dot 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* ============================================================
+   10 · SPEAKING GALLERY — horizontal spread accordion.
+   Animate flex-grow, never width: every slat is flex-basis 0,
+   so siblings absorb the difference with zero reflow math.
+   ============================================================ */
+/* display is owned by the markup ("hidden lg:flex") — do not set it here,
+   or it overrides Tailwind's `hidden` and the rail leaks onto mobile */
+.gallery-rail {
+  gap: 12px;
+  height: clamp(400px, 46vw, 560px);
+}
+
+.gallery-slat {
+  position: relative;
+  overflow: hidden;
+  flex: 1 1 0%;
+  min-width: 0;
+  cursor: pointer;
+  padding: 0;
+  border: 2px solid var(--ink);
+  border-radius: 28px; /* pill when collapsed, card when open — one value */
+  background: var(--surface);
+  z-index: 1;
+  transition: flex-grow 0.55s var(--ease-snap), box-shadow 0.4s ease, transform 0.15s ease;
+}
+
+.gallery-slat img {
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter 0.45s ease 0.1s;
+}
+
+.gallery-slat:not([aria-expanded='true']):hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--accent);
+}
+
+.gallery-slat[aria-expanded='true'] {
+  flex: 5.2 1 0%;
+  z-index: 2;
+  box-shadow: 10px 10px 0 0 var(--accent);
+}
+
+.gallery-slat[aria-expanded='true'] img {
+  filter: none;
+}
+
+/* collapsed face — leaves fast on open (120ms), returns late on close */
+.gallery-slat__closed {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  background: rgba(242, 241, 232, 0.55);
+  opacity: 1;
+  transition: opacity 0.2s ease 0.4s;
+}
+
+.gallery-slat[aria-expanded='true'] .gallery-slat__closed {
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.gallery-slat__dot {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 9999px;
+  background: var(--accent);
+}
+
+/* telegraphs the auto-advance across the dwell */
+.gallery-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 5px;
+  z-index: 3;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation-name: gallery-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes gallery-progress {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================================
+   11 · DARK-PANEL FORM FIELDS
+   ============================================================ */
+.input-dark {
+  width: 100%;
+  background: rgba(13, 13, 15, 0.6);
+  border: 2px solid rgba(244, 243, 239, 0.22);
+  border-radius: 16px;
+  padding: 14px 16px;
+  color: var(--ink-inv);
+  transition: border-color 0.15s ease;
+}
+
+.input-dark::placeholder {
+  color: rgba(244, 243, 239, 0.35);
+}
+
+.input-dark:focus,
+.input-dark:focus-visible {
+  outline: none;
+  border-color: var(--blue-lt);
+}
+
+/* ============================================================
+   12 · REDUCED MOTION — ambient motion off, hover stays
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.15s !important;
+  }
+
+  .marquee-track,
+  .pulse-dot {
+    animation: none;
+  }
+
+  .gallery-progress {
+    display: none;
+  }
+}

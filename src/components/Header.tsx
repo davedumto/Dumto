@@ -1,151 +1,190 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Moon, Sun } from 'lucide-react';
-import { useTheme } from '../contexts/ThemeContext';
+import Image from 'next/image';
+import { BOOKING_EMAIL } from '../site';
+
+const EASE: [number, number, number, number] = [0.22, 0.9, 0.24, 1];
+
+const NAV_LINKS = [
+  { label: 'About', href: '#about' },
+  { label: 'Newsletter', href: '#newsletter' },
+  { label: 'Community', href: '#community' },
+];
 
 export function Header() {
-  const { theme, toggleTheme } = useTheme();
-  const name = 'David Ejere';
-  const title = 'Public Speaker & Leadership Expert';
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    const sections = NAV_LINKS.map((link) => ({
+      href: link.href,
+      el: document.querySelector<HTMLElement>(link.href),
+    }));
+
+    const onScroll = () => {
+      setScrolled(window.scrollY > 80);
+
+      // Active section: the last one whose top has crossed the upper 40% of
+      // the viewport; none while the hero is still on screen.
+      const probeLine = window.innerHeight * 0.4;
+      let current: string | null = null;
+      for (const section of sections) {
+        if (section.el && section.el.getBoundingClientRect().top <= probeLine) {
+          current = section.href;
+        }
+      }
+      setActiveSection(current);
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, []);
+
+  const reveal = (delay: number) => ({
+    initial: { opacity: 0, y: 16 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.52, ease: EASE, delay },
+  });
 
   return (
-    <header className="relative h-screen flex flex-col justify-between overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-blue-100 dark:from-slate-900 dark:via-blue-900 dark:to-blue-800 transition-all duration-500">
-      {/* Theme Toggle Button */}
-      <motion.button
-        onClick={toggleTheme}
-        whileHover={{ scale: 1.1, rotate: 180 }}
-        whileTap={{ scale: 0.9 }}
-        className="fixed top-4 right-4 sm:top-6 sm:right-6 z-50 p-3 backdrop-blur-xl bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 rounded-2xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
-        aria-label="Toggle theme"
+    <>
+      <nav
+        className={`fixed inset-x-0 top-0 z-50 border-b-2 transition-colors duration-200 ${
+          scrolled ? 'border-ink bg-paper' : 'border-transparent bg-transparent'
+        }`}
       >
-        {theme === 'light' ? (
-          <Moon className="h-5 w-5 text-slate-700 dark:text-slate-300" />
-        ) : (
-          <Sun className="h-5 w-5 text-amber-500" />
-        )}
-      </motion.button>
-      
-      {/* Modern geometric background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-blue-600/20 dark:from-blue-500/10 dark:to-blue-400/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-tl from-blue-300/20 to-blue-500/20 dark:from-blue-600/10 dark:to-blue-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-3/4 left-3/4 w-64 h-64 bg-gradient-to-br from-blue-200/20 to-blue-400/20 dark:from-blue-700/10 dark:to-blue-500/10 rounded-full blur-3xl animate-pulse delay-2000"></div>
-      </div>
+        <div className="container-page flex items-center justify-between py-4">
+          {/* -my keeps the bigger mark from stretching the nav's height */}
+          <a href="#top" className="flex items-center" aria-label="David Ejere, back to top">
+            <Image
+              src="/logo-wide.png"
+              alt="David Ejere logo"
+              width={196}
+              height={48}
+              priority
+              className="-my-1 h-10 w-auto sm:h-12"
+            />
+          </a>
+          <div className="hidden items-center gap-8 sm:flex">
+            {NAV_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className={`nav-link text-sm ${activeSection === link.href ? 'nav-link--active' : ''}`}
+                aria-current={activeSection === link.href ? 'true' : undefined}
+              >
+                {link.label}
+              </a>
+            ))}
+          </div>
+          <a href={`mailto:${BOOKING_EMAIL}`} className="btn btn-primary px-5 py-3 text-sm">
+            Book me
+          </a>
+        </div>
+      </nav>
 
-      {/* Hero Content */}
-      <div className="relative z-10 text-center max-w-5xl mx-auto px-6 flex-1 flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          {/* Modern badge */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-            className="inline-flex items-center gap-2 mb-8 px-4 py-2 backdrop-blur-xl bg-white/10 dark:bg-black/10 border border-white/20 dark:border-white/10 rounded-full text-sm font-medium text-slate-700 dark:text-slate-300"
-          >
-            <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-            Inspiring Audiences Worldwide
-          </motion.div>
+      <header id="top" className="relative flex min-h-screen items-center overflow-hidden pb-24 pt-28">
+        <div className="container-page grid w-full items-center gap-14 lg:grid-cols-2 lg:gap-16">
+          {/* Left — copy */}
+          <div className="text-center lg:text-left">
+            <motion.div {...reveal(0)}>
+              <span className="chip">
+                <span className="pulse-dot" />
+                Inspiring audiences worldwide
+              </span>
+            </motion.div>
 
-          {/* Modern typography */}
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight"
-          >
-            <span className="bg-gradient-to-r from-slate-900 via-blue-800 to-blue-900 dark:from-white dark:via-blue-200 dark:to-blue-100 bg-clip-text text-transparent">
-              {name.split(' ')[0]}
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 dark:from-blue-400 dark:via-blue-300 dark:to-blue-200 bg-clip-text text-transparent">
-              {name.split(' ')[1]}
-            </span>
-          </motion.h1>
-
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-4 sm:mt-6 text-lg sm:text-xl md:text-2xl text-slate-600 dark:text-slate-300 font-light max-w-3xl mx-auto leading-relaxed"
-          >
-            {title}
-          </motion.p>
-
-          {/* Modern CTA buttons */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="mt-8 sm:mt-12 flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <motion.a 
-              href="#newsletter"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600 text-white font-semibold rounded-2xl shadow-lg hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300"
-            >
-              <span className="flex items-center gap-2">
-                Subscribe to Newsletter
+            <h1 className="mt-9 text-[clamp(3rem,7.5vw,5.5rem)] font-semibold leading-[1.02] tracking-[-0.02em]">
+              {/* per-line clip reveal: lines rise out of overflow-hidden wrappers */}
+              <span className="block overflow-hidden pb-1">
                 <motion.span
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
+                  className="block"
+                  initial={{ y: '100%' }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
                 >
-                  →
+                  David
                 </motion.span>
               </span>
-            </motion.a>
-            
-            <motion.a 
-              href="#about"
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 backdrop-blur-xl bg-white/10 dark:bg-black/10 border-2 border-blue-500 dark:border-blue-400 text-slate-700 dark:text-slate-300 font-semibold rounded-2xl hover:bg-white/20 dark:hover:bg-black/20 hover:border-blue-600 dark:hover:border-blue-300 transition-all duration-300"
+              <span className="block overflow-hidden px-2 pb-5 pt-2 lg:-ml-4">
+                <motion.span
+                  className="relative inline-block px-6 sm:px-8"
+                  initial={{ y: '100%' }}
+                  animate={{ y: 0 }}
+                  transition={{ duration: 0.7, ease: EASE, delay: 0.23 }}
+                >
+                  {/* hand-drawn highlight box — the one place the geometry breaks */}
+                  <svg
+                    className="absolute inset-0 h-full w-full"
+                    style={{ transform: 'rotate(-0.8deg)' }}
+                    viewBox="0 0 330 126"
+                    preserveAspectRatio="none"
+                    aria-hidden="true"
+                  >
+                    <path d="M14 20 L310 10 L316 100 L8 112 Z" fill="var(--blue)" transform="translate(8 8)" />
+                    <path d="M14 20 L310 10 L316 100 L8 112 Z" fill="var(--surface)" stroke="var(--ink)" strokeWidth="3" />
+                  </svg>
+                  <span className="relative">Ejere</span>
+                </motion.span>
+              </span>
+            </h1>
+
+            <motion.p
+              {...reveal(0.45)}
+              className="mx-auto mt-7 max-w-[46ch] text-lg text-muted sm:text-xl lg:mx-0"
             >
-              Learn More
-            </motion.a>
-          </motion.div>
-        </motion.div>
-      </div>
-      
-      {/* Scroll indicator */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2 text-slate-600 dark:text-slate-400"
-        >
+              Software Engineer turned public speaker and leadership expert,
+              helping professionals unlock their potential.
+            </motion.p>
+
+            <motion.div
+              {...reveal(0.6)}
+              className="mt-11 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start"
+            >
+              <a href="#newsletter" className="btn btn-primary">
+                Subscribe to newsletter <span aria-hidden="true">→</span>
+              </a>
+              <a href="#about" className="btn btn-secondary">
+                More about me
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right — portrait, last in the entrance sequence */}
           <motion.div
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="p-2 backdrop-blur-xl bg-white/20 dark:bg-black/20 border border-white/30 dark:border-white/10 rounded-full"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: EASE, delay: 0.75 }}
+            className="relative mx-auto w-full max-w-[380px] lg:ml-auto lg:mr-2 lg:max-w-[440px]"
           >
-            <svg 
-              className="w-5 h-5" 
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M7 7l5 5 5-5M7 13l5 5 5-5" 
-              />
-            </svg>
+            <div className="hero-portrait">
+              <div className="relative aspect-[4/5]">
+                <Image
+                  src="/hero-portrait.jpg"
+                  alt="David Ejere, studio portrait"
+                  fill
+                  sizes="(min-width: 1024px) 440px, 90vw"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
           </motion.div>
+        </div>
+
+        <motion.div {...reveal(1.0)} className="absolute inset-x-0 bottom-6 text-center">
+          <a href="#about" className="font-mono text-xs font-medium tracking-[0.14em] text-label">
+            SCROLL ↓
+          </a>
         </motion.div>
-      </motion.div>
-    </header>
+      </header>
+    </>
   );
 }

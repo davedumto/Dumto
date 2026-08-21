@@ -42,137 +42,137 @@ export async function POST(request: NextRequest) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Welcome to David Ejere's Newsletter</title>
-        <style>
-          body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8fafc;
-            margin: 0;
-            padding: 0;
-          }
-          .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-          }
-          .header {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            color: white;
-            padding: 40px 30px;
-            text-align: center;
-          }
-          .header h1 {
-            margin: 0;
-            font-size: 28px;
-            font-weight: 700;
-          }
-          .content {
-            padding: 40px 30px;
-          }
-          .content h2 {
-            color: #1e293b;
-            font-size: 24px;
-            margin-bottom: 20px;
-          }
-          .content p {
-            color: #64748b;
-            font-size: 16px;
-            margin-bottom: 20px;
-          }
-          .webinar-box {
-            background: linear-gradient(135deg, #eff6ff, #dbeafe);
-            border: 2px solid #3b82f6;
-            border-radius: 12px;
-            padding: 25px;
-            margin: 25px 0;
-            text-align: center;
-          }
-          .webinar-box h3 {
-            color: #1e40af;
-            font-size: 20px;
-            margin: 0 0 10px 0;
-          }
-          .webinar-box p {
-            color: #1e40af;
-            margin: 0;
-            font-weight: 600;
-          }
-          .footer {
-            background-color: #f1f5f9;
-            padding: 25px 30px;
-            text-align: center;
-            color: #64748b;
-            font-size: 14px;
-          }
-          .social-links {
-            margin: 20px 0;
-          }
-          .social-links a {
-            display: inline-flex;
-            align-items: center;
-            margin: 0 15px;
-            color: #3b82f6;
-            text-decoration: none;
-            padding: 8px;
-            border-radius: 8px;
-            transition: background-color 0.2s;
-          }
-          .social-links a:hover {
-            background-color: #e0f2fe;
-          }
-          .social-icon {
-            width: 24px;
-            height: 24px;
-            margin-right: 8px;
-            display: inline-block;
-          }
-        </style>
       </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h1>Welcome to the Newsletter!</h1>
-          </div>
-          <div class="content">
-            <h2>Hi ${name}! 👋</h2>
-            <p>Thank you for subscribing to my newsletter! I'm excited to have you join our community of professionals who are committed to developing their leadership skills and advancing their careers.</p>
-            
-            <div class="webinar-box">
-              <h3>🎁 Your FREE Webinar Access</h3>
-              <p>"Unlock Your Leadership Potential"</p>
-              <p>Access link will be sent separately within 24 hours!</p>
-            </div>
-            
-            <p>Here's what you can expect from my weekly newsletter:</p>
-            <ul>
-              <li><strong>The Professional Leadership Blueprint</strong> - Actionable strategies for career growth</li>
-              <li><strong>Real transformation stories</strong> - Learn from others' success journeys</li>
-              <li><strong>Exclusive workshop invitations</strong> - First access to my speaking events</li>
-              <li><strong>Leadership insights</strong> - From my experience building software and teaching leadership</li>
-            </ul>
-            
-            <p>I'm looking forward to being part of your success journey!</p>
-            
-            <p>Best regards,<br><strong>David Ejere</strong></p>
-          </div>
-          <div class="footer">
-            <div class="social-links">
-              <a href="https://www.linkedin.com/in/david-ejere-5056161a1/">
-                <img src="https://res.cloudinary.com/dwjnkuvqv/image/upload/v1727180738/Uptions_Vector_mr3yf7.png" alt="LinkedIn" class="social-icon">
-                LinkedIn
-              </a>
-              <a href="https://www.instagram.com/dumtochukwu_/">
-                <img src="https://res.cloudinary.com/dwjnkuvqv/image/upload/v1727180738/Uptions_Vector_1_faowco.png" alt="Instagram" class="social-icon">
-                Instagram
-              </a>
-            </div>
-            <p>You're receiving this because you signed up for David Ejere's newsletter.
-          </div>
-        </div>
+      <body style="margin:0; padding:0; background-color:#F2F1E8;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#F2F1E8;">
+          <tr>
+            <td align="center" style="padding:36px 16px;">
+              <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px; width:100%;">
+
+                <!-- main card, hard blue shadow -->
+                <tr>
+                  <td style="background-color:#2563EB; padding:0 8px 8px 0; border-radius:20px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#F6F5EE; border:2px solid #0D0D0F; border-radius:18px;">
+                      <tr>
+                        <td style="padding:36px 32px;">
+
+                          <h1 style="margin:0 0 18px 0; font-family:Arial, Helvetica, sans-serif; font-size:32px; font-weight:800; letter-spacing:-1px; color:#0D0D0F;">
+                            You're in, ${name}.
+                          </h1>
+
+                          <p style="margin:0 0 16px 0; font-family:Arial, Helvetica, sans-serif; font-size:16px; line-height:1.6; color:#2E2E31;">
+                            Thank you for signing up to my newsletter. You've just joined a group of professionals who are serious about growing, in their careers, in their leadership, and in what they build. I don't send noise, I send things you can use.
+                          </p>
+
+                          <!-- webinar box -->
+                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;">
+                            <tr>
+                              <td style="background-color:#0D0D0F; padding:0 6px 6px 0; border-radius:16px;">
+                                <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#F2F1E8; border:2px solid #0D0D0F; border-radius:14px;">
+                                  <tr>
+                                    <td style="padding:22px 24px;">
+                                      <p style="margin:0 0 8px 0; font-family:'Courier New', Courier, monospace; font-size:11px; font-weight:bold; letter-spacing:2px; color:#2563EB;">
+                                        &#9670; YOUR FREE WEBINAR PASS
+                                      </p>
+                                      <p style="margin:0 0 6px 0; font-family:Arial, Helvetica, sans-serif; font-size:19px; font-weight:800; color:#0D0D0F;">
+                                        Unlock Your Leadership Potential
+                                      </p>
+                                      <p style="margin:0; font-family:Arial, Helvetica, sans-serif; font-size:14px; line-height:1.5; color:#2E2E31;">
+                                        Your access link is on its way, it lands in your inbox within 24 hours.
+                                      </p>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+
+                          <p style="margin:0 0 12px 0; font-family:Arial, Helvetica, sans-serif; font-size:16px; font-weight:700; color:#0D0D0F;">
+                            Every week, straight to this inbox:
+                          </p>
+                          <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 8px 0;">
+                            <tr>
+                              <td style="font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:1.9; color:#2E2E31;">
+                                <span style="color:#2563EB;">&#9670;</span>&nbsp; The Professional Leadership Blueprint, strategies you can act on<br>
+                                <span style="color:#2563EB;">&#9670;</span>&nbsp; Real career transformation stories from real people<br>
+                                <span style="color:#2563EB;">&#9670;</span>&nbsp; First access to my workshops and speaking events<br>
+                                <span style="color:#2563EB;">&#9670;</span>&nbsp; Lessons from building software and building leaders
+                              </td>
+                            </tr>
+                          </table>
+
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- whatsapp community card, dark with green shadow -->
+                <tr>
+                  <td style="padding-top:22px;">
+                    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="background-color:#25D366; padding:0 8px 8px 0; border-radius:20px;">
+                          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#0D0D0F; border:2px solid #0D0D0F; border-radius:18px;">
+                            <tr>
+                              <td style="padding:30px 32px;">
+                                <p style="margin:0 0 10px 0; font-family:'Courier New', Courier, monospace; font-size:11px; font-weight:bold; letter-spacing:2px; color:#25D366;">
+                                  &#9670; ONE MORE THING
+                                </p>
+                                <p style="margin:0 0 12px 0; font-family:Arial, Helvetica, sans-serif; font-size:22px; font-weight:800; letter-spacing:-0.5px; color:#F4F3EF;">
+                                  The conversation continues on WhatsApp.
+                                </p>
+                                <p style="margin:0 0 20px 0; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:1.6; color:#D9D8D4;">
+                                  The newsletter is weekly, the community is daily. Inside, I share quick insights on leadership, tech and AI, announce events before anywhere else, and host value packed webinars, including how to leverage AI to build new income streams. One tap and you're in.
+                                </p>
+                                <table role="presentation" cellpadding="0" cellspacing="0">
+                                  <tr>
+                                    <td style="background-color:#25D366; border:2px solid #25D366; border-radius:12px;">
+                                      <a href="https://whatsapp.com/channel/0029VbBW58oKmCPXDsGrX10Q" style="display:inline-block; padding:13px 24px; font-family:Arial, Helvetica, sans-serif; font-size:15px; font-weight:700; color:#0D0D0F; text-decoration:none;">
+                                        Join the WhatsApp community &rarr;
+                                      </a>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </td>
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <!-- sign-off -->
+                <tr>
+                  <td style="padding:26px 4px 0 4px;">
+                    <p style="margin:0; font-family:Arial, Helvetica, sans-serif; font-size:15px; line-height:1.6; color:#2E2E31;">
+                      I'm glad you're here.<br><br>
+                      <strong style="color:#0D0D0F;">David Ejere</strong>
+                    </p>
+                  </td>
+                </tr>
+
+                <!-- footer -->
+                <tr>
+                  <td style="padding:26px 4px 0 4px;">
+                    <p style="margin:0 0 8px 0; font-family:'Courier New', Courier, monospace; font-size:11px; letter-spacing:1px; color:#6B6B6E;">
+                      <a href="https://www.linkedin.com/in/david-ejere-5056161a1" style="color:#2563EB; text-decoration:none; font-weight:bold;">LINKEDIN</a>
+                      &nbsp;<span style="color:#2563EB;">&#9670;</span>&nbsp;
+                      <a href="https://www.instagram.com/dumtochukwu_/" style="color:#2563EB; text-decoration:none; font-weight:bold;">INSTAGRAM</a>
+                      &nbsp;<span style="color:#2563EB;">&#9670;</span>&nbsp;
+                      <a href="https://www.ejere.site" style="color:#2563EB; text-decoration:none; font-weight:bold;">EJERE.SITE</a>
+                    </p>
+                    <p style="margin:0; font-family:'Courier New', Courier, monospace; font-size:11px; letter-spacing:1px; color:#6B6B6E;">
+                      You're receiving this because you signed up at ejere.site.
+                    </p>
+                  </td>
+                </tr>
+
+              </table>
+            </td>
+          </tr>
+        </table>
       </body>
       </html>
     `;
@@ -180,7 +180,7 @@ export async function POST(request: NextRequest) {
     await transporter.sendMail({
       from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
       to: email,
-      subject: 'Welcome! Your FREE Leadership Webinar Access Inside ',
+      subject: 'Welcome! Your free leadership webinar pass is inside',
       html: confirmationEmailHtml,
     });
 

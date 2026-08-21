@@ -177,26 +177,46 @@ export async function POST(request: NextRequest) {
       </html>
     `;
 
-    await transporter.sendMail({
-      from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
-      to: email,
-      subject: 'Welcome! Your free leadership webinar pass is inside',
-      html: confirmationEmailHtml,
-    });
-
-    // Save subscriber to MongoDB
+    // Save first: nobody should get a welcome email without being on the list
     const newSubscriber = new Subscriber({
       name,
       email: email.toLowerCase(),
     });
-    
+
     await newSubscriber.save();
+
+    // The subscription already succeeded, so an email failure is logged
+    // rather than failing the request (a retry would 409 on the saved email)
+    try {
+      await transporter.sendMail({
+        from: `${process.env.FROM_NAME} <${process.env.FROM_EMAIL}>`,
+        to: email,
+        subject: 'Welcome! Your free leadership webinar pass is inside',
+        html: confirmationEmailHtml,
+      });
+    } catch (emailError) {
+      console.error('Welcome email failed to send:', emailError);
+    }
 
     return NextResponse.json(
       { message: 'Successfully subscribed to newsletter!' },
       { status: 200 }
     );
   } catch (error) {
+    // Two requests can pass the findOne check at once; the unique index
+    // rejects the loser, which is a duplicate, not a server error
+    if (
+      typeof error === 'object' &&
+      error !== null &&
+      'code' in error &&
+      (error as { code?: number }).code === 11000
+    ) {
+      return NextResponse.json(
+        { error: 'This email is already subscribed to the newsletter' },
+        { status: 409 }
+      );
+    }
+
     console.error('Newsletter subscription error:', error);
     console.error('Error details:', {
       message: error instanceof Error ? error.message : 'Unknown error',
